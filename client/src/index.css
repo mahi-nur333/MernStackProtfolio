@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+}
+
+:root{
+  /* Backgrounds */
+  --bg-0: #05070d;
+  --bg-1: #070b14;
+  --bg-2: #0b1630;
+
+  /* Surfaces */
+  --surface: rgba(255,255,255,0.06);
+  --surface-2: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.12);
+
+  /* Text */
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.68);
+
+  /* Accent */
+  --accent: #3b82f6;
+  --accent-2: #60a5fa;
+
+  /* Effects */
+  --shadow: 0 18px 60px rgba(0,0,0,0.45);
+  --radius: 18px;
+}
+
+body {
+  background-color: var(--bg-0);
+  background-image:
+    radial-gradient(
+      900px 520px at 50% 0%,
+      color-mix(in srgb, var(--accent) 18%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(1200px 700px at 50% 0%, var(--bg-2), var(--bg-0));
+  background-repeat: no-repeat;
+  background-attachment: fixed, fixed;
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+#root {
+  min-height: 100%;
+}
+
+a {
+  color: inherit;
+}
