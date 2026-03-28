@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Section from "./components/Section";
@@ -9,38 +10,34 @@ import Projects from "./components/Project";
 import Leadership from "./components/Leadership";
 import Award from "./components/Award";
 import Contact from "./components/Contact";
+import Admin from "./pages/Admin";
 
-
-function App() {
+function Home() {
   return (
     <div>
-      <Navbar />  
+      <Navbar />
       <Hero />
-      <Section id="education" title="Education">
-        <Education />
-      </Section>
-      <Section id="experience" title="Experience">
-        <Experience />
-      </Section>
-      <Section id="publications" title="Publications">
-        <Publication />
-      </Section>
-      <Section id="projects" title="Projects">
-        <Projects />
-      </Section>
-      <Section id="leadership" title="Leadership & Community Engagement">
-        <Leadership />
-      </Section>
-      <Section id="awards" title="Awards & Scholarships">
-        <Award />
-      </Section>
-      <Section id="about" title="About Me">
-        <About />
-      </Section>
-      <Section id="contact" title="Contact">
-        <Contact />
-      </Section>
+      <Section id="education" title="Education"><Education /></Section>
+      <Section id="experience" title="Experience"><Experience /></Section>
+      <Section id="publications" title="Publications"><Publication /></Section>
+      <Section id="projects" title="Projects"><Projects /></Section>
+      <Section id="leadership" title="Leadership & Community Engagement"><Leadership /></Section>
+      <Section id="awards" title="Awards & Scholarships"><Award /></Section>
+      <Section id="about" title="About Me"><About /></Section>
+      <Section id="contact" title="Contact"><Contact /></Section>
     </div>
   );
 }
-export default App
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;

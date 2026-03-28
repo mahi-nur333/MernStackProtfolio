@@ -3,7 +3,7 @@ function Hero() {
   return (
      <section className="hero" id="home">
         <h1 className= "hero-title">
-            <span className="intro-text">Hi, I'am </span><br/>
+            <span className="intro-text">Hi,I'm </span><br/>
             <span className="highlight">Mahinur Rahman Pamel</span></h1>
         <p> Full Stack Developer | Research Enthusiast</p>
 

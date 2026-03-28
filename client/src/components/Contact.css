@@ -57,7 +57,6 @@
 .contactForm input,
 .contactForm textarea {
   width: 100%;
-  padding: 18px 20px;
   border-radius: 18px;
   border: 1px solid var(--border);
   background: var(--surface);
@@ -67,6 +66,10 @@
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
+.contactForm input {
+  padding: 12px 20px;
+}
+
 .contactForm input:focus,
 .contactForm textarea:focus {
   border-color: var(--accent-2);
@@ -74,8 +77,9 @@
 }
 
 .contactForm textarea {
+  padding: 16px 20px;
   resize: vertical;
-  min-height: 160px;
+  min-height:120px;
 }
 
 .contactForm button {
@@ -94,6 +98,39 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(59, 130, 246, 0.28);
 }
+
+.contactStatus {
+  margin-top: 6px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.contactStatus--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contactStatus--success {
+  color: #86efac;
+  border-color: rgba(34, 197, 94, 0.35);
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.14), var(--surface));
+}
+
+.contactStatus--error {
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.35);
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.14), var(--surface));
+}
+
+
 
 @media (max-width: 900px) {
   .contactContainer {

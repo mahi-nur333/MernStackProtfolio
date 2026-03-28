@@ -1,60 +1,62 @@
 // src/components/Project.jsx
 import "./Project.css";
-
-const projects = [
-  {
-    title: "Credit Card Fraud Detection",
-    icon: "💳",
-    description:
-      "ML-based fraud detection using classification models with focus on imbalanced data handling and evaluation.",
-    tech: ["Python", "Pandas", "Scikit-learn", "ML"],
-    github:
-      "https://github.com/mahi-nur333/Credit-Card-Fraud-Detection-Using-a-Machine-Learning-Approach.git",
-    live: "",
-  },
-  {
-    title: "House Price Prediction",
-    icon: "🏠",
-    description:
-      "Regression analysis on housing dataset with preprocessing, feature engineering and model comparison.",
-    tech: ["Python", "Regression", "EDA", "ML"],
-    github:
-      "https://github.com/mahi-nur333/MU_PDS01_Pamel_PDS-ID13_Regression-Analysis-with-Python-using-the-Ames-Housing-Dataset.git",
-    live: "",
-  },
-  {
-    title: "Portfolio Website",
-    icon: "🌐",
-    description:
-      "It was my first portfolio which was beginer level, built with modern UI, glassmorphism cards, and responsive sections.",
-    tech: ["React", "CSS", "Netlify"],
-    github:
-      "https://github.com/mahi-nur333/Web-Programming-Project_Personal-Portfolio-Website.git",
-    live: "https://mrpamelportfolio.netlify.app/",
-  },
-];
+import { useEffect, useState } from "react";
 
 export default function Projects() {
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setHasError(false);
+        const response = await fetch("http://localhost:5000/api/projects");
+        if (!response.ok) {
+          throw new Error("Failed to fetch projects");
+        }
+
+        const data = await response.json();
+        setProjects(Array.isArray(data) ? data : []);
+      } catch (_error) {
+        setHasError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   return (
     <div>
       <p className="projectsIntro">
         A few things I've built — ML projects + web work.
       </p>
 
+      {isLoading && <p className="projectsIntro">Loading projects...</p>}
+      {hasError && <p className="projectsIntro">Could not load projects right now.</p>}
+      {!isLoading && !hasError && projects.length === 0 && (
+        <p className="projectsIntro">No projects available yet. Add one from your admin dashboard.</p>
+      )}
+
       <div className="projectsGrid">
         {projects.map((p) => (
-          <article key={p.title} className="glassCard">
+          <article key={p._id || p.name} className="glassCard">
             <div className="cardTop">
               <span className="cardIcon" aria-hidden="true">
-                {p.icon}
+                {p.icon || "📌"}
               </span>
-              <h3 className="cardTitle">{p.title}</h3>
+              <h3 className="cardTitle">{p.name}</h3>
             </div>
 
             <p className="cardDesc">{p.description}</p>
 
             <div className="tags">
-              {p.tech.map((t) => (
+              {(typeof p.tech === "string" ? p.tech.split(",") : p.tech || [])
+                .map((t) => String(t).trim())
+                .filter(Boolean)
+                .map((t) => (
                 <span key={t} className="tag">
                   {t}
                 </span>
@@ -62,18 +64,24 @@ export default function Projects() {
             </div>
 
             <div className="cardActions">
-              <a
-                className="btnGhost"
-                href={p.github}
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-              {p.live ? (
+              {p.githubUrl ? (
+                <a
+                  className="btnGhost"
+                  href={p.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub
+                </a>
+              ) : (
+                <button className="btnDisabled" disabled>
+                  GitHub N/A
+                </button>
+              )}
+              {p.liveUrl ? (
                 <a
                   className="btnPrimary"
-                  href={p.live}
+                  href={p.liveUrl}
                   target="_blank"
                   rel="noreferrer"
                 >
