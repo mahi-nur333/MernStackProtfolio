@@ -13,7 +13,7 @@ export default function AdminDashboard({ onLogout }) {
   const fetchContacts = async () => {
     setIsRefreshingContacts(true);
     try {
-      const response = await fetch("http://localhost:5000/api/contacts", {
+      const response = await fetch("https://m-r-pamel.onrender.com/api/contacts", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -24,7 +24,7 @@ export default function AdminDashboard({ onLogout }) {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/projects")
+    fetch("https://m-r-pamel.onrender.com/api/projects")
       .then((res) => res.json())
       .then((data) => setProjects(data));
 
@@ -36,18 +36,18 @@ export default function AdminDashboard({ onLogout }) {
 
   const handleAddProject = async (e) => {
     e.preventDefault();
-    await fetch("http://localhost:5000/api/projects", {
+    await fetch("https://m-r-pamel.onrender.com/api/projects", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify(newProject),
     });
     setNewProject({ name: "", icon: "", tech: "", description: "", githubUrl: "", liveUrl: "" });
-    const updated = await fetch("http://localhost:5000/api/projects").then((r) => r.json());
+    const updated = await fetch("https://m-r-pamel.onrender.com/api/projects").then((r) => r.json());
     setProjects(updated);
   };
 
   const handleDeleteProject = async (id) => {
-    await fetch(`http://localhost:5000/api/projects/${id}`, {
+    await fetch(`https://m-r-pamel.onrender.com/api/projects/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -57,7 +57,7 @@ export default function AdminDashboard({ onLogout }) {
   const handleDeleteContact = async (id) => {
     setDeletingContactId(id);
     try {
-      await fetch(`http://localhost:5000/api/contacts/${id}`, {
+      await fetch(`https://m-r-pamel.onrender.com/api/contacts/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
