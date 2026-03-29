@@ -54,26 +54,35 @@ app.post("/api/contact", async (req, res) => {
     const newContact = new Contact({ name, email, subject, message });
     await newContact.save();
 
-    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
+    let emailStatus = "skipped";
 
-      await transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        subject: `New Contact: ${subject}`,
-        text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`,
-      });
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      try {
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+          },
+        });
+
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: process.env.EMAIL_USER,
+          subject: `New Contact: ${subject}`,
+          text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`,
+        });
+
+        emailStatus = "sent";
+      } catch (mailErr) {
+        emailStatus = "failed";
+        console.error("Email notification failed:", mailErr.message);
+      }
     } else {
       console.warn("EMAIL_USER/EMAIL_PASS not set. Skipping email notification.");
     }
 
-    return res.json({ message: "Message sent successfully!" });
+    return res.json({ message: "Message sent successfully!", emailStatus });
   } catch (err) {
     console.error("Contact form error:", err.message);
     return res.status(500).json({ message: "Failed to process message" });
