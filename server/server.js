@@ -7,6 +7,7 @@ import Project from "./models/project.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import Admin from "./models/admin.js";
+import nodemailer from "nodemailer";
 
     dotenv.config();
 
@@ -43,9 +44,28 @@ app.delete("/api/projects/:id", async (req, res) => {
 //Contact routes
 app.post("/api/contact", async (req, res) => {
   const { name, email, subject, message } = req.body;
+  
+  // Save to MongoDB
   const newContact = new Contact({ name, email, subject, message });
   await newContact.save();
-  res.json({ message: "Message saved successfully!" });
+
+  // Send email notification
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  await transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
+    subject: `New Contact: ${subject}`,
+    text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`,
+  });
+
+  res.json({ message: "Message sent successfully!" });
 });
 
 app.get("/api/contacts", async (_req, res) => {
