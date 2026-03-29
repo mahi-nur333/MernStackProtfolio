@@ -43,29 +43,41 @@ app.delete("/api/projects/:id", async (req, res) => {
 
 //Contact routes
 app.post("/api/contact", async (req, res) => {
-  const { name, email, subject, message } = req.body;
-  
-  // Save to MongoDB
-  const newContact = new Contact({ name, email, subject, message });
-  await newContact.save();
+  try {
+    const { name, email, subject, message } = req.body;
 
-  // Send email notification
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+    if (!name || !email || !subject || !message) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER,
-    subject: `New Contact: ${subject}`,
-    text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`,
-  });
+    // Always save the message even if email sending is unavailable.
+    const newContact = new Contact({ name, email, subject, message });
+    await newContact.save();
 
-  res.json({ message: "Message sent successfully!" });
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: `New Contact: ${subject}`,
+        text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`,
+      });
+    } else {
+      console.warn("EMAIL_USER/EMAIL_PASS not set. Skipping email notification.");
+    }
+
+    return res.json({ message: "Message sent successfully!" });
+  } catch (err) {
+    console.error("Contact form error:", err.message);
+    return res.status(500).json({ message: "Failed to process message" });
+  }
 });
 
 app.get("/api/contacts", async (_req, res) => {

@@ -51,13 +51,20 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
       if (!response.ok) {
-        throw new Error("Failed to send message");
+        let errorMessage = "Failed to send message";
+        try {
+          const data = await response.json();
+          if (data?.message) errorMessage = data.message;
+        } catch {
+          // Keep fallback message when response is not JSON.
+        }
+        throw new Error(errorMessage);
       }
 
       showStatus("Message sent successfully!", "contactStatus--success");
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
-      showStatus("Something went wrong. Please try again.", "contactStatus--error");
+      showStatus(error.message || "Something went wrong. Please try again.", "contactStatus--error");
     }
   };
 
