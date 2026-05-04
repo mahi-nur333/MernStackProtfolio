@@ -10,13 +10,9 @@ export default function About() {
     <p>
 Hi, I am Pamel, a Computer Science and Engineering student, full-stack developer, and research enthusiast focused on building practical, high-impact solutions.
     </p>
-
+    
     <p>
-I grew up in Balaganj, Sylhet, and my early involvement in community and leadership work shaped how I approach problems and teamwork.
-    </p>
-
-    <p>
-Now based in Sylhet, I am pursuing a BSc in CSE at Metropolitan University, where I focus on turning ideas into reliable software.
+I grew up in Balaganj, Sylhet, and my early involvement in community and leadership work shaped how I approach problems and teamwork.Now based in Sylhet, I am pursuing a BSc in CSE at Metropolitan University, where I focus on turning ideas into reliable software.
     </p>
 
     <p>
