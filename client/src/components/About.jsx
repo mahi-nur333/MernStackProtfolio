@@ -7,31 +7,30 @@ export default function About() {
         <img className="about-photo" src={profile} alt="Profile" />
     </div>
     <div className="about-right">
-        
-     <p>
-Hi, I’m Pamel — a Computer Science student, full-stack developer, and research enthusiast driven by curiosity and impact.
-</p>
+    <p>
+Hi, I am Pamel, a Computer Science and Engineering student, full-stack developer, and research enthusiast focused on building practical, high-impact solutions.
+    </p>
 
-<p>
-I grew up in Balaganj, Sylhet, where I was actively involved in community and leadership activities that shaped my mindset and problem-solving approach.
-</p>
+    <p>
+I grew up in Balaganj, Sylhet, and my early involvement in community and leadership work shaped how I approach problems and teamwork.
+    </p>
 
-<p>
-I later moved to Sylhet and am currently pursuing my BSc. in CSE  at Metropolitan University, where I discovered my passion for building real-world solutions through technology.
-</p>
+    <p>
+Now based in Sylhet, I am pursuing a BSc in CSE at Metropolitan University, where I focus on turning ideas into reliable software.
+    </p>
 
-<p>
-I work with JavaScript, React, Node.js, and MongoDB to create scalable web applications that solve meaningful problems.
-</p>
+    <p>
+I build with JavaScript, React, Node.js, Express.js, and MongoDB, and I prioritize clean architecture, performance, and user experience.
+    </p>
 
-<p>
-Alongside development, I explore AI and machine learning research and enjoy leading teams, organizing initiatives, and collaborating with others.
-</p>
+    <p>
+Alongside development, I explore AI and machine learning research and enjoy leading initiatives, organizing teams, and collaborating across disciplines.
+    </p>
 
-<p>
-I’m passionate about continuous learning, collaboration, and creating impact through technology.
-</p>
-          
+    <p>
+I am committed to continuous learning and creating real-world impact through technology.
+    </p>
+
     </div>
     </div>
     );

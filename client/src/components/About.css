@@ -30,13 +30,36 @@
     margin-bottom: 14px;
 }
 
+.about-cv {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.about-cv:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
     .about-container {
         gap: 18px;
+        justify-content: center;
     }
     .about-left img {
-        width: 220px;
-        height: 260px;
+        width: min(220px, 80vw);
+        height: auto;
+        aspect-ratio: 13 / 15;
     }
     .about-right {
         text-align: left;
