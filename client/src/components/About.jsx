@@ -8,12 +8,30 @@ export default function About() {
     </div>
     <div className="about-right">
         
-        <p>
-            I am a Computer Science student passionate about full-stack development, research, and leadership.I enjoy building scalable web applications and solving real-world problems through technology.I have experience in JavaScript, React, Node.js, and MongoDB.I am also a research enthusiast, exploring topics in AI and machine learning.I have held leadership roles in various student organizations, where I have honed my communication and teamwork skills.I am eager to contribute my skills and knowledge to impactful projects and continue learning in the ever-evolving tech landscape.
-        </p>
+     <p>
+Hi, I’m Pamel — a Computer Science student, full-stack developer, and research enthusiast driven by curiosity and impact.
+</p>
 
-      
-        
+<p>
+I grew up in Balaganj, Sylhet, where I was actively involved in community and leadership activities that shaped my mindset and problem-solving approach.
+</p>
+
+<p>
+I later moved to Sylhet and am currently pursuing my BSc. in CSE  at Metropolitan University, where I discovered my passion for building real-world solutions through technology.
+</p>
+
+<p>
+I work with JavaScript, React, Node.js, and MongoDB to create scalable web applications that solve meaningful problems.
+</p>
+
+<p>
+Alongside development, I explore AI and machine learning research and enjoy leading teams, organizing initiatives, and collaborating with others.
+</p>
+
+<p>
+I’m passionate about continuous learning, collaboration, and creating impact through technology.
+</p>
+          
     </div>
     </div>
     );
