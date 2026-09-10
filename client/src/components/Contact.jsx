@@ -2,7 +2,7 @@ import "./Contact.css";
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaMapMarkerAlt, FaGithub, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 
-const EMAIL = "mahi.pamel@email.com";
+const EMAIL = "mahi.pamel@gmail.com";
 const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL)}`;
 
 export default function Contact() {
